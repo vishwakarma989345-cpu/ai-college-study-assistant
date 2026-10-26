@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI College Study Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero"><div class="eyebrow">STUDENT PRODUCTIVITY • CSE PROJECT</div><h1>AI College Study Assistant</h1><p>Study notes, practice quizzes, student chat, and resume building in one place.</p><span class="pill">Python · Flask · HTML · CSS · JavaScript · SQLite</span></header>
+  <main class="layout">
+    <section class="panel"><h2>📚 Study Assistant</h2>
+      <label for="notes">Paste your study notes or topic</label><textarea id="notes" rows="8" placeholder="Example: Object-oriented programming organizes software around objects..."></textarea>
+      <label for="question">Ask a question</label><input id="question" type="text" placeholder="Example: What is a class in OOP?">
+      <div class="buttons"><button data-action="summary">Summarize notes</button><button data-action="quiz" class="secondary">Generate quiz</button><button data-action="ask" class="secondary">Ask question</button></div>
+      <p class="hint">Local demo mode uses simple rules. Real AI responses require an API key.</p>
+      <div class="result-head"><h2>Your study result</h2><span id="mode" class="mode">Ready</span></div><div id="result" class="result" aria-live="polite">Your result will appear here.</div><button id="clear" class="clear-btn">Clear result</button>
+    </section>
+    <section class="panel"><h2>💬 Student Chat</h2><p class="hint">Demo chat: use a name for yourself and the name of the person you want to message.</p>
+      <label for="chatUser">Your name</label><input id="chatUser" placeholder="e.g. Rohan">
+      <label for="chatWith">Chat with</label><input id="chatWith" placeholder="e.g. Aman">
+      <div id="chatMessages" class="chat-messages">Enter both names and click Refresh chat.</div>
+      <label for="chatMessage">Message</label><textarea id="chatMessage" rows="3" placeholder="Type your message..."></textarea>
+      <div class="buttons"><button id="sendChat">Send message</button><button id="refreshChat" class="secondary">Refresh chat</button></div>
+      <p class="hint">Messages are stored in a local SQLite database on this computer. This demo has no login or encryption; do not use private information.</p>
+    </section>
+    <section class="panel resume-panel"><h2>🧾 Resume Builder</h2><p class="hint">Fill in your own details. The preview will be created from the information you provide.</p>
+      <div class="form-grid">
+        <div><label for="resumeName">Full name *</label><input id="resumeName" placeholder="Your full name"></div>
+        <div><label for="resumeEmail">Email</label><input id="resumeEmail" type="email" placeholder="you@example.com"></div>
+        <div><label for="resumePhone">Phone</label><input id="resumePhone" placeholder="Phone number"></div>
+        <div><label for="resumeLocation">City</label><input id="resumeLocation" placeholder="City, State"></div>
+        <div><label for="resumeEducation">Education *</label><input id="resumeEducation" placeholder="B.Tech CSE, College, Year"></div>
+        <div><label for="resumeSkills">Skills *</label><input id="resumeSkills" placeholder="C++, Python, HTML, CSS"></div>
+      </div>
+      <label for="resumeProjects">Projects</label><textarea id="resumeProjects" rows="3" placeholder="Project name and what it does"></textarea>
+      <label for="resumeObjective">Career objective</label><textarea id="resumeObjective" rows="2" placeholder="A short professional objective"></textarea>
+      <div class="buttons"><button id="makeResume">Generate resume</button><button id="printResume" class="secondary" disabled>Print / Save as PDF</button></div>
+      <div id="resumePreview" class="resume-preview">Your resume preview will appear here.</div>
+    </section>
+  </main>
+  <footer>College demo project. Check all details before sharing a resume.</footer>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body></html>
