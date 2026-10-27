@@ -77,22 +77,176 @@ def register():
             except sqlite3.IntegrityError:
                 error = "Username ya email pehle se registered hai."
 
+   
     return render_template_string("""
     <!DOCTYPE html>
-    <html>
-    <head><title>Register</title></head>
-    <body style="font-family:Arial;max-width:350px;margin:60px auto">
-      <h2>Create Account</h2>
-      <p style="color:red">{{ error }}</p>
-      <form method="post">
-        <input name="username" placeholder="Username" required maxlength="60"><br><br>
-        <input name="email" type="email" placeholder="Email" required><br><br>
-        <input name="password" type="password" placeholder="Password (8+ characters)" minlength="8" required><br><br>
-        <button type="submit">Register</button>
-      </form>
-      <p>Already registered? <a href="/login">Login</a></p>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register | AI Study Assistant</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #101a3a, #4338ca, #06b6d4);
+            }
+
+            .register-card {
+                width: 100%;
+                max-width: 410px;
+                padding: 35px;
+                background: white;
+                border-radius: 22px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            }
+
+            .logo {
+                width: 65px;
+                height: 65px;
+                margin: 0 auto 18px;
+                border-radius: 18px;
+                background: #eef2ff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 30px;
+            }
+
+            h1 {
+                text-align: center;
+                color: #172033;
+                font-size: 26px;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #6b7280;
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            label {
+                display: block;
+                margin: 17px 0 8px;
+                color: #374151;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            input {
+                width: 100%;
+                padding: 13px 14px;
+                border: 1px solid #d1d5db;
+                border-radius: 10px;
+                font-size: 15px;
+                outline: none;
+            }
+
+            input:focus {
+                border-color: #4f46e5;
+                box-shadow: 0 0 0 3px #e0e7ff;
+            }
+
+            button {
+                width: 100%;
+                margin-top: 24px;
+                padding: 14px;
+                border: none;
+                border-radius: 10px;
+                background: #4338ca;
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background 0.2s, transform 0.2s;
+            }
+
+            button:hover {
+                background: #3730a3;
+                transform: translateY(-2px);
+            }
+
+            .error {
+                color: #dc2626;
+                text-align: center;
+                font-size: 14px;
+            }
+
+            .signup {
+                margin-top: 22px;
+                text-align: center;
+                color: #6b7280;
+                font-size: 14px;
+            }
+
+            a {
+                color: #4338ca;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 480px) {
+                .register-card {
+                    padding: 25px 20px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="register-card">
+            <div class="logo">🎓</div>
+
+            <h1>Create Account</h1>
+            <p class="subtitle">Join your AI College Study Assistant</p>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+            <form method="post">
+                <label for="username">Username</label>
+                <input id="username" name="username"
+                       placeholder="Enter your username"
+                       maxlength="60" required>
+
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email"
+                       placeholder="Enter your email" required>
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password"
+                       placeholder="At least 8 characters"
+                       minlength="8" required>
+
+                <button type="submit">Create Account</button>
+            </form>
+
+            <p class="signup">
+                Already registered?
+                <a href="{{ url_for('login') }}">Login</a>
+            </p>
+        </div>
     </body>
     </html>
+    
+
     """, error=error)
 
 
